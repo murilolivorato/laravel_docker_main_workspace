@@ -8,7 +8,6 @@ class SiteController extends Controller
       //intro
       public function index(Request $request)
       {
-            dd("foiii");
             $response = Http::get('http://laravel_workspace_api_one/api/get-api');
             dd($response->json());
       }

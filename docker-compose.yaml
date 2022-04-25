@@ -1,9 +1,12 @@
 version: "3.9"
 
 networks:
+  laravel_workspace_api:
+    external:
+      name: laravel_workspace_api
   laravel_main_workspace:
-  laral_project_api_app_laravel_workspace_api_shared:
-    external: true
+  # laral_project_api_app_laravel_workspace_api_shared:
+    # external: true
 
 services: 
   server:
@@ -21,18 +24,22 @@ services:
       - redis
       - mysql
       - mailhog
+    container_name: nginx
     networks:
       - laravel_main_workspace
-      - laral_project_api_app_laravel_workspace_api_shared
+      - laravel_workspace_api
+      # - laral_project_api_app_laravel_workspace_api_shared
   php:
     build:
       context: .
       dockerfile: dockerfiles/php.dockerfile
     volumes: 
       - ./src:/var/www/html:delegated
+    container_name: php  
     networks:
       - laravel_main_workspace
-      - laral_project_api_app_laravel_workspace_api_shared  
+      - laravel_workspace_api
+      # - laral_project_api_app_laravel_workspace_api_shared  
   mysql:
     image: mysql:8.0.1
     env_file: 
