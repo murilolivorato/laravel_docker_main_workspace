@@ -2,6 +2,7 @@ version: "3.9"
 
 networks:
   laravel_main_workspace:
+    name: laravel_main_workspace
   laral_project_api_app_laravel_workspace_api_shared:
     external: true
 
